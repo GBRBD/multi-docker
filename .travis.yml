@@ -21,3 +21,17 @@ after_success:
   - docker push gbrbd/multi-nginx
   - docker push gbrbd/multi-server
   - docker push gbrbd/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-central-1'
+  app: multi-docker
+  bucket_name: 'elasticbeanstalk-eu-central-1-800962361902'
+  bucket_path: 'docker-multi'
+  env: MultiDocker-env
+  on:
+    branch: master
+  access_key_id:
+    secure: '$AWS_ACCES_KEY'
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
